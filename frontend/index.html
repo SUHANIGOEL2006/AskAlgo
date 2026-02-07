@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AskAlgo</title>
+  <link rel="icon" sizes="512x512" href="images/askAlgo_favicon.png" >
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' };
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+</head>
+<body class="min-h-screen flex flex-col text-gray-100 bg-gray-900 transition-colors duration-500">
+  
+  <!-- Background gradient -->
+<div id="background" 
+     class="absolute inset-0 -z-10 
+            bg-gradient-to-br from-blue-100 via-pink-50 to-purple-100
+            dark:from-gray-900 dark:via-black dark:to-gray-800
+            transition-all duration-500">
+</div>
+
+
+
+  <!-- Navbar -->
+<nav class="bg-gray-900 dark:bg-gray-800 text-white px-6 py-3 flex items-center justify-between shadow-lg">
+  <!-- Left: Logo -->
+  <div class="flex items-center space-x-3">
+    <img src="images/askalgo_navbar.png" alt="logo" class="w-12 h-12 rounded-full shadow-md">
+    <span class="text-2xl font-bold text-green-400">AskAlgo</span>
+  </div>
+
+  <!-- Desktop menu -->
+  <div class="hidden md:flex items-center space-x-3">
+    <a href="login.html" class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-lg font-semibold shadow transition">Login</a>
+    <a href="signup.html" class="px-4 py-2 rounded-lg font-semibold hover:bg-gray-700 transition">Sign up</a>
+
+    <!-- Dark mode toggle -->
+    <label class="inline-flex items-center cursor-pointer ml-2">
+    <input type="checkbox" class="dark-toggle sr-only peer">
+    <div class="relative w-11 h-6 bg-gray-200 rounded-full 
+        peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300
+        dark:peer-focus:ring-green-700 dark:bg-gray-700
+        peer-checked:bg-green-500 dark:peer-checked:bg-green-500
+        after:content-[''] after:absolute after:top-[2px] after:left-[2px]
+        after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all
+        peer-checked:after:translate-x-full">
+    </div>
+    <span class="ml-2 text-sm font-medium text-gray-200">Dark</span>
+    </label>
+
+  </div>
+
+  <!-- Mobile hamburger button -->
+  <button id="menu-btn" class="md:hidden flex items-center text-gray-200 hover:text-white focus:outline-none">
+    <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+    </svg>
+  </button>
+</nav>
+
+<!-- Mobile dropdown -->
+<div id="mobile-menu" class="hidden md:hidden bg-gray-900 dark:bg-gray-800 px-6 py-4 space-y-3">
+  <a href="login.html" class="block bg-green-500 hover:bg-green-600 px-4 py-2 rounded-lg font-semibold shadow transition">Login</a>
+  <a href="signup.html" class="block px-4 py-2 rounded-lg font-semibold hover:bg-gray-700 transition">Sign up</a>
+
+  <!-- Dark mode toggle (mobile) -->
+  <!-- Dark mode toggle -->
+  <label class="inline-flex items-center cursor-pointer ml-2">
+  <input type="checkbox" class="dark-toggle sr-only peer">
+  <div class="relative w-11 h-6 bg-gray-200 rounded-full 
+        peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300
+        dark:peer-focus:ring-green-700 dark:bg-gray-700
+        peer-checked:bg-green-500 dark:peer-checked:bg-green-500
+        after:content-[''] after:absolute after:top-[2px] after:left-[2px]
+        after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all
+        peer-checked:after:translate-x-full">
+  </div>
+  <span class="ml-2 text-sm font-medium text-gray-200">Dark</span>
+  </label>
+
+</div>
+
+
+  <!-- Tagline -->
+  <div class="w-full flex justify-center py-6 mt-4 transition-colors duration-500">
+    <h1 style="font-family: 'Roboto Slab', serif;" 
+        class="text-3xl sm:text-4xl font-extrabold text-green-500 dark:text-green-400 drop-shadow-lg">
+      Have a doubt? AskAlgo!
+    </h1>
+  </div>
+
+  <!-- Main Chat Area -->
+  <div class="flex flex-col items-center justify-center flex-1 p-4">
+    <div class="bg-white dark:bg-gray-800/70 backdrop-blur-md shadow-2xl rounded-2xl p-6 w-full max-w-3xl flex flex-col border border-gray-700">
+      
+      <!-- Chat container -->
+      <div id="chat-container" class="flex flex-col gap-3 overflow-y-auto h-96 p-2 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800 rounded"></div>
+      
+      <!-- Input area -->
+      <div class="mt-4 flex">
+        <input
+          id="question"
+          type="text"
+          placeholder="Type your message..."
+          class="flex-1 px-4 py-3 border border-gray-600 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-green-400 bg-gray-900/70 text-white placeholder-gray-400"
+        >
+        <button
+          onclick="askQuestion()"
+          class="bg-green-500 hover:bg-green-600 active:scale-95 transition transform text-white px-6 py-3 rounded-r-lg font-semibold shadow-md"
+        >Send</button>
+      </div>
+    </div>
+
+    <div class="flex justify-center mt-4 mb-6">
+        <button id="clear-chat-btn" class="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg shadow transition">Clear Chat</button>
+    </div>
+  </div>
+
+<!-- Footer -->
+<footer class="bg-gray-900 dark:bg-gray-800 text-gray-400 py-10">
+  <div class="max-w-4xl mx-auto px-4 text-center space-y-6">
+
+    <div>
+      <h2 class="text-white font-bold text-2xl">AskAlgo</h2>
+      <p class="text-gray-400 text-base mt-2">Your academic companion for quick and reliable answers</p>
+    </div>
+    <div class="border-t border-gray-700 mt-4"></div>
+    <div class="mt-6 text-gray-300 text-sm space-y-1">
+      <p>© 2025 AskAlgo. All rights reserved.</p>
+      <p>Made with <span class="text-pink-400">❤️</span> by <span class="text-white font-medium">Suhani</span></p>
+    </div>
+  </div>
+</footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
