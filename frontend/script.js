@@ -57,7 +57,7 @@ function askQuestion() {
   chatContainer.scrollTop = chatContainer.scrollHeight;
 
   // Call backend
-  fetch("http://127.0.0.1:8000/ask", {
+  fetch("https://askalgo-ejqo.onrender.com/ask", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ question }),
